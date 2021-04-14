@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Refresh.Sort;
 
 namespace Refresh
 {
@@ -28,10 +29,31 @@ namespace Refresh
             //TwoDList();
             //TwoDArray();
 
-            var library = new Library();
+            //var library = new Library();
 
-            var book = library.Checkout("Pain", "Dr. Pain");
-            Console.WriteLine(book.ToString());
+            //var book = library.Checkout("Pain", "Dr. Pain");
+            //Console.WriteLine(book.ToString());
+            var nodes = MakeNode();
+            var sort = new InsertionSort(nodes);
+            sort.Sort();
+        }
+
+        private static List<Node> MakeNode()
+        {
+            var nodes = new List<Node>();
+            var random = new Random();
+            var ints = Enumerable.Range(0, 20)
+                .Select(i => random.Next(20))
+                .ToList();
+            foreach (var num in ints)
+                nodes.Add(new Node
+                {
+                    Value = num
+                });
+            Console.WriteLine("Generated List");
+            InsertionSort.PrintList(nodes);
+
+            return nodes;
         }
 
         /// <summary>
